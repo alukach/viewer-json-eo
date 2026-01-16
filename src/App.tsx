@@ -129,17 +129,19 @@ const App: React.FC = () => {
         onThemeChange={handleThemeChange}
       />
 
-      <Toolbar
-        activeTab={activeTab}
-        filterText={filterText}
-        onFilterChange={setFilterText}
-        onSave={handleSave}
-        onCopy={handleCopy}
-        onCollapseAll={handleCollapseAll}
-        onExpandAll={handleExpandAll}
-        isPrettyPrinted={isPrettyPrinted}
-        onTogglePrettyPrint={handlePrettyPrint}
-      />
+      {activeTab !== 'openeo' && (
+        <Toolbar
+          activeTab={activeTab}
+          filterText={filterText}
+          onFilterChange={setFilterText}
+          onSave={handleSave}
+          onCopy={handleCopy}
+          onCollapseAll={handleCollapseAll}
+          onExpandAll={handleExpandAll}
+          isPrettyPrinted={isPrettyPrinted}
+          onTogglePrettyPrint={handlePrettyPrint}
+        />
+      )}
 
       <JsonContent
         activeTab={activeTab}
