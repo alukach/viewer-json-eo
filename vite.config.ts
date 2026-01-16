@@ -3,19 +3,20 @@ import react from '@vitejs/plugin-react'
 import { viteStaticCopy } from 'vite-plugin-static-copy'
 
 export default defineConfig({
+  base: '/viewer-json-eo/',
   plugins: [
     react(),
     viteStaticCopy({
       targets: [
         {
           src: 'node_modules/@openeo/vue-components/assets/*',
-          dest: 'assets'
-        }
-      ]
-    })
+          dest: 'assets',
+        },
+      ],
+    }),
   ],
   build: {
     outDir: 'dist',
-    sourcemap: true
-  }
+    sourcemap: true,
+  },
 })
