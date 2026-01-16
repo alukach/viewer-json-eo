@@ -14,9 +14,11 @@
     "@vitejs/plugin-react": "^5.1.2",
     "react-use": "^17.5.0",
     "typescript": "^5.4.3",
-    "vite": "^7.3.1"
+    "vite": "^7.3.1",
+    "vite-plugin-static-copy": "^3.1.4"
   },
   "dependencies": {
+    "@openeo/vue-components": "^2.22.0",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
     "react-json-tree": "^0.20.0"

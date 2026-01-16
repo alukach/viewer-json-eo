@@ -50,6 +50,26 @@ type AppState =
   | { type: 'error'; url: string; error: string }
   | { type: 'success'; url: string; data: any; jsonText: string }
 
+// OpenEO Viewer Component using Web Component
+const OpenEOViewer: React.FC<{ url: string }> = ({ url }) => {
+  const stacRef = useCallback((node: HTMLElement | null) => {
+    if (node) {
+      node.setAttribute('url', url)
+    }
+  }, [url])
+
+  return <openeo-stac ref={stacRef} style={{ display: 'block', height: '100%' }} />
+}
+
+// Declare the custom element for TypeScript
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      'openeo-stac': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>
+    }
+  }
+}
+
 const App: React.FC = () => {
   const prefersDark = useMedia('(prefers-color-scheme: dark)')
   const [userTheme, setUserTheme] = useState<'light' | 'dark' | undefined>(() => {
@@ -57,7 +77,7 @@ const App: React.FC = () => {
     return saved === 'light' || saved === 'dark' ? saved : undefined
   })
   const [state, setState] = useState<AppState>({ type: 'no-url' })
-  const [activeTab, setActiveTab] = useState<'json' | 'raw'>('json')
+  const [activeTab, setActiveTab] = useState<'json' | 'raw' | 'openeo'>('json')
   const [filterText, setFilterText] = useState('')
   const [shouldExpandAll, setShouldExpandAll] = useState(true)
   const [isPrettyPrinted, setIsPrettyPrinted] = useState(true)
@@ -227,6 +247,12 @@ const App: React.FC = () => {
         >
           Raw Data
         </button>
+        <button
+          className={`tab ${activeTab === 'openeo' ? 'active' : ''}`}
+          onClick={() => setActiveTab('openeo')}
+        >
+          OpenEO
+        </button>
         <div className="tab-spacer"></div>
         <div className="header-right">
           <label htmlFor="theme-select">Theme:</label>
@@ -271,7 +297,7 @@ const App: React.FC = () => {
 
       {/* Content */}
       <div className="content">
-        {activeTab === 'json' ? (
+        {activeTab === 'json' && (
           <div className="json-content">
             <JSONTree
               key={shouldExpandAll ? 'expanded' : 'collapsed'}
@@ -282,10 +308,14 @@ const App: React.FC = () => {
               hideRoot={true}
             />
           </div>
-        ) : (
+        )}
+        {activeTab === 'raw' && (
           <div className="raw-content">
             <pre>{getRawJsonDisplay()}</pre>
           </div>
+        )}
+        {activeTab === 'openeo' && state.type === 'success' && (
+          <OpenEOViewer url={state.url} />
         )}
       </div>
     </div>
