@@ -2,7 +2,14 @@ import React, { useState, useEffect, useCallback } from 'react'
 import { useMedia } from 'react-use'
 import type { AppState, TabType, ThemeType } from './types'
 import { lightTheme, darkTheme } from './themes'
-import { NoUrlMessage, LoadingMessage, ErrorMessage, Tabs, Toolbar, JsonContent } from './components'
+import {
+  NoUrlMessage,
+  LoadingMessage,
+  ErrorMessage,
+  Tabs,
+  Toolbar,
+  JsonContent,
+} from './components'
 import './index.css'
 
 const App: React.FC = () => {
@@ -28,6 +35,10 @@ const App: React.FC = () => {
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search)
     const jsonUrl = urlParams.get('url')
+    const tab = urlParams.get('tab') as TabType | null
+    if (tab) {
+      setActiveTab(tab)
+    }
 
     if (!jsonUrl) {
       setState({ type: 'no-url' })
