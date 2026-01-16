@@ -20,7 +20,6 @@ const App: React.FC = () => {
   })
   const [state, setState] = useState<AppState>({ type: 'no-url' })
   const [activeTab, setActiveTab] = useState<TabType>('json')
-  const [filterText, setFilterText] = useState('')
   const [shouldExpandAll, setShouldExpandAll] = useState(true)
   const [isPrettyPrinted, setIsPrettyPrinted] = useState(true)
 
@@ -143,8 +142,6 @@ const App: React.FC = () => {
       {activeTab !== 'openeo' && (
         <Toolbar
           activeTab={activeTab}
-          filterText={filterText}
-          onFilterChange={setFilterText}
           onSave={handleSave}
           onCopy={handleCopy}
           onCollapseAll={handleCollapseAll}

@@ -3,8 +3,6 @@ import type { TabType } from '../types'
 
 interface ToolbarProps {
   activeTab: TabType
-  filterText: string
-  onFilterChange: (text: string) => void
   onSave: () => void
   onCopy: () => void
   onCollapseAll: () => void
@@ -15,14 +13,12 @@ interface ToolbarProps {
 
 export const Toolbar: React.FC<ToolbarProps> = ({
   activeTab,
-  filterText,
-  onFilterChange,
   onSave,
   onCopy,
   onCollapseAll,
   onExpandAll,
   isPrettyPrinted,
-  onTogglePrettyPrint
+  onTogglePrettyPrint,
 }) => (
   <div className="toolbar">
     <div className="toolbar-buttons">
@@ -39,14 +35,5 @@ export const Toolbar: React.FC<ToolbarProps> = ({
         </button>
       )}
     </div>
-    {activeTab === 'json' && (
-      <input
-        type="text"
-        className="filter-input"
-        placeholder="Filter JSON"
-        value={filterText}
-        onChange={(e) => onFilterChange(e.target.value)}
-      />
-    )}
   </div>
 )
