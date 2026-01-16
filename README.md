@@ -56,10 +56,13 @@ http://localhost:5173/?url=https://jsonplaceholder.typicode.com/posts/1
 ## Features in Detail
 
 ### Tabs
+
 - **JSON** - Interactive tree view with syntax highlighting
 - **Raw Data** - Plain text view of the JSON
+- **OpenEO** - OpenEO Object Tree view ([source](https://github.com/Open-EO/openeo-vue-components))
 
 ### Toolbar (JSON Tab)
+
 - **Save** - Download the JSON file
 - **Copy** - Copy JSON to clipboard
 - **Collapse All** - Collapse all nodes in the tree
@@ -67,6 +70,7 @@ http://localhost:5173/?url=https://jsonplaceholder.typicode.com/posts/1
 - **Filter JSON** - Search box for filtering (UI ready, filtering logic coming soon)
 
 ### Theme Options
+
 - **system** - Follow system dark/light mode preference
 - **light** - Force light theme
 - **dark** - Force dark theme
